@@ -16,7 +16,7 @@ func NuevoProducto(id int, name string, prec float64, cant int) *Producto {
 		Precio:   prec,
 		Cantidad: cant,
 	}
-	
+
 }
 
 func (p *Producto) ActualizarPrecio(NuevoPrecio float64) {
@@ -37,25 +37,37 @@ func (p Producto) MostrarInfo() {
 	fmt.Println("El CANTIDAD de el producto es: ", p.Cantidad)
 }
 
-type Inventario struct{
+type Inventario struct {
 	Productos map[int]Producto
 }
 
-func NuevoInventario()Inventario{
+func NuevoInventario() Inventario {
 	return Inventario{
 		Productos: map[int]Producto{},
 	}
 }
 
-func (inve*Inventario)AgregarProducto(p Producto){
-	p.ID+=1
-	inve.Productos[p.ID]=p
+func (inve *Inventario) AgregarProducto(p Producto) {
+	p.ID += 1
+	inve.Productos[p.ID] = p
 }
 
-func (inve*Inventario)EliminarProducto(p Producto){
-	p,existencia := inve.Productos[p.ID]
-	if existencia == true{
-		delete(inve.Productos,p.ID)
+func (inve *Inventario) EliminarProducto(p Producto) {
+	p, existencia := inve.Productos[p.ID]
+	if existencia == true {
+		delete(inve.Productos, p.ID)
+	} else {
+		fmt.Println("El producto no se encontro")
+	}
+}
+
+func (inve *Inventario) BuscarProducto(p Producto) {
+	p, existencia := inve.Productos[p.ID]
+	if existencia == true {
+		fmt.Println(inve.Productos[p.ID])
+
+	} else {
+		fmt.Println("El producto no se encontro")
 	}
 }
 
